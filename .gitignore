@@ -1,0 +1,4 @@
+.idea/*
+Audiobooks/*
+__pycache__/*
+**/*.pyc
