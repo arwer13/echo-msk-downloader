@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from urllib.request import urlopen
+from urllib.error import HTTPError
 import datetime
 import os
 
 import config
 
 g_base_url = "http://cdn.echo.msk.ru/snd"
+
 
 def get_last_program_time(pr):
     threshold = datetime.datetime.now() - config.publishing_delay
@@ -42,10 +44,13 @@ def make_url(pr, dt):
 def download(pr, dt):
     ep_path = get_eposode_path(pr, dt)
     url = make_url(pr, dt)
-    print("Download of {} started.".format(url))
-    with urlopen(url) as rr, open(ep_path, "wb") as ff:
-        ff.write(rr.read())
-    print("Download of {} finished.".format(url))
+    episode_name = episode_file_name(pr, dt)
+    try:
+        with urlopen(url) as rr, open(ep_path, "wb") as ff:
+            ff.write(rr.read())
+            print("Episode {} downloaded.".format(episode_name))
+    except HTTPError as e:
+        print("Can't download {}. Maybe it's not published yet?".format(episode_file_name(pr, dt)))
 
 
 if __name__ == '__main__':
@@ -53,6 +58,5 @@ if __name__ == '__main__':
         last_program_time = get_last_program_time(p)
         if not was_downloaded(p, last_program_time):
             download(p, last_program_time)
-            print("Episode {} was downloaded.".format(episode_file_name(p, last_program_time)))
         else:
             print("Episode {} was ALREADY downloaded.".format(episode_file_name(p, last_program_time)))
