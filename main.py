@@ -18,12 +18,12 @@ def get_last_program_time(pr):
     return the_time
 
 
-def get_eposode_path(pr, dt):
+def get_episode_path(pr, dt):
     return os.path.join(make_programme_folder(pr), episode_file_name(pr, dt))
 
 
 def was_downloaded(pr, dt):
-    return os.path.exists(get_eposode_path(pr, dt))
+    return os.path.exists(get_episode_path(pr, dt))
 
 
 def make_programme_folder(pr):
@@ -42,14 +42,14 @@ def make_url(pr, dt):
 
 
 def download(pr, dt):
-    ep_path = get_eposode_path(pr, dt)
+    ep_path = get_episode_path(pr, dt)
     url = make_url(pr, dt)
     episode_name = episode_file_name(pr, dt)
     try:
         with urlopen(url) as rr, open(ep_path, "wb") as ff:
             ff.write(rr.read())
             print("Episode {} downloaded.".format(episode_name))
-    except HTTPError as e:
+    except HTTPError:
         print("Can't download {}. Maybe it's not published yet?".format(episode_file_name(pr, dt)))
 
 
