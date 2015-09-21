@@ -8,6 +8,7 @@ from common import *
 publishing_delay = datetime.timedelta(hours=8)
 output_dir = "Audiobooks"
 
+
 programmes = [
     {
         "code": "code",
@@ -18,7 +19,7 @@ programmes = [
     {
         "code": "sut",
         "name": "Суть событий",
-        "time": datetime.time(21, 5),
+        "time": datetime.time(21, 7),
         "dow": Dow.Friday
     }
 ]
