@@ -34,6 +34,12 @@ programmes = [
         "time": datetime.time(12, 8),
         "dow": Dow.Sunday
     },
+    {
+        "code": "naukafokus",
+        "name": "Наука в фокусе",
+        "time": datetime.time(16, 7),
+        "dow": Dow.Friday
+    },
     #{
         #"code": "tabel",
         #"name": "Табель о рангах",
