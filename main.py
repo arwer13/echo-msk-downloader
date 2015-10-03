@@ -39,9 +39,16 @@ def make_programme_folder(pr):
 def possible_episode_file_names(pr, dt):
     result = []
     for shift in g_episode_time_shifts:
-        tt = datetime.time(pr["time"].hour, pr["time"].minute + shift)
+        program_datetime = datetime.datetime(
+            year=dt.year,
+            month=dt.month,
+            day=dt.day,
+            hour=pr["time"].hour,
+            minute=pr["time"].minute
+        )
+        program_datetime += datetime.timedelta(minutes=shift)
         result.append(
-            "{}-{}-{}.mp3".format(dt.strftime("%Y-%m-%d"), pr["code"], tt.strftime("%H%M"))
+            "{}-{}-{}.mp3".format(program_datetime.strftime("%Y-%m-%d"), pr["code"], program_datetime.strftime("%H%M"))
         )
     return result
 

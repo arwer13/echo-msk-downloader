@@ -35,6 +35,12 @@ programmes = [
         "dow": Dow.Sunday
     },
     {
+        "code": "vsetak",
+        "name": "Все так",
+        "time": datetime.time(18, 4),
+        "dow": Dow.Saturday
+    },
+    {
         "code": "naukafokus",
         "name": "Наука в фокусе",
         "time": datetime.time(16, 7),
